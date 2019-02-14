@@ -214,9 +214,7 @@ public class Home extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_artist) {
-
-        }else if (id == R.id.nav_view) {
+        if (id == R.id.nav_view) {
             startActivity(new Intent(Home.this, Booking.class));
             // Handle the camera action
         } else if (id == R.id.nav_book) {

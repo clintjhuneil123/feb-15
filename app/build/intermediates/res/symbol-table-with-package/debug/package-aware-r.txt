@@ -1246,11 +1246,16 @@ id barrier
 id beginning
 id blocking
 id book_date
+id book_dateart
 id book_location
+id book_locationart
+id book_nameart
 id book_people
-id book_rate
+id book_peopleart
 id book_status
+id book_statusart
 id book_time
+id book_timeart
 id bottom
 id btnBack
 id btnFinish
@@ -1310,7 +1315,6 @@ id edtLocation
 id edtLocationart
 id edtName
 id edtPrice
-id edtRatesart
 id edtpeopleart
 id end
 id end_padder
@@ -1390,7 +1394,6 @@ id mt_search
 id mtrl_child_content_container
 id mtrl_internal_children_alpha_tag
 id multiply
-id nav_artist
 id nav_book
 id nav_gallery
 id nav_log
@@ -1405,7 +1408,6 @@ id normal
 id notification_background
 id notification_main_column
 id notification_main_column_container
-id number_button1
 id number_counter
 id outline
 id packed
@@ -1424,6 +1426,7 @@ id progress_horizontal
 id radio
 id recycler_art
 id recycler_book
+id recycler_bookart
 id recycler_list
 id recycler_list1
 id recycler_menu
@@ -1598,6 +1601,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_add_images
 layout activity_artist_add_list
+layout activity_artist_booking
 layout activity_artist_detail
 layout activity_artist_home
 layout activity_artist_list
@@ -1657,6 +1661,7 @@ layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
 layout pending_layout
+layout pendingartlayout
 layout pendingstatus
 layout searchbar
 layout select_dialog_item_material

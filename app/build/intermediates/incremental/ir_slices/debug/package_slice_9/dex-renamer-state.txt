@@ -1,4 +1,4 @@
-#Fri Feb 15 00:04:57 CST 2019
-base.0=C\:\\Users\\Administrator\\Desktop\\lalala\\IMYASFINAL\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\9
+#Fri Feb 15 01:49:20 CST 2019
+base.0=C\:\\Users\\Administrator\\Desktop\\feb-15\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\9
 path.0=classes.dex
 renamed.0=classes.dex

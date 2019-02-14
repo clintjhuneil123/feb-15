@@ -7,6 +7,8 @@ public class CommonArt {
 
     public static final String UPDATE = "Update";
     public static final String DELETE = "Delete";
+    public static final String ACCEPT = "Accept";
+    public static final String DECLINE = "Decline";
 
     public static final int PICK_IMAGE_REQUEST = 71;
 

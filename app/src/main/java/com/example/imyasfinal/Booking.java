@@ -42,7 +42,7 @@ public class Booking extends AppCompatActivity {
         booktime = (TextView) findViewById(R.id.book_date);
         bookdate = (TextView) findViewById(R.id.book_date);
         bookpeople = (TextView) findViewById(R.id.book_people);
-        bookrate = (TextView) findViewById(R.id.book_rate);
+//        bookrate = (TextView) findViewById(R.id.book_rate);
         bookstatus=(TextView) findViewById(R.id.book_status);
 
         menu();
@@ -58,9 +58,10 @@ public class Booking extends AppCompatActivity {
             @Override
             protected void populateViewHolder(RequestViewHolder viewHolder, Request model, int position) {
                 viewHolder.bookloc.setText(model.getLocation());
-                viewHolder.booktime.setText(model.getCurrenttime());
-                viewHolder.bookdate.setText(model.getCurrentdate());
                 viewHolder.bookpeople.setText(model.getPeople());
+//                viewHolder.bookrate.setText(model.getRates());
+                viewHolder.bookdate.setText(model.getCurrentdate());
+                viewHolder.booktime.setText(model.getCurrenttime());
                 viewHolder.bookstatus.setText(model.getStatus());
 //                viewHolder.bookstatus.setText(model.get);
                 final  Request clickItem = model;

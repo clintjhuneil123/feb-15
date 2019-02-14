@@ -68,7 +68,7 @@ public class ArtistProfile extends AppCompatActivity {
         }
     }
 
-    private void getprofile(String detailId) {
+    private void getprofile(final String detailId) {
 
         adapter = new FirebaseRecyclerAdapter<ArtistPorfolio, ListViewHolder>(ArtistPorfolio.class,R.layout.listitem,ListViewHolder.class,details) {
             @Override
@@ -84,6 +84,7 @@ public class ArtistProfile extends AppCompatActivity {
                     public void onClick(View view, int position, boolean isLongClick) {
                         Intent artistDetail = new Intent(ArtistProfile.this,ArtistDetail.class);
                         artistDetail.putExtra("ArtistID",adapter.getRef(position).getKey());
+                        artistDetail.putExtra("id", detailId);
                         startActivity(artistDetail);
 
 

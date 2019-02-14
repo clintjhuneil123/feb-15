@@ -33,7 +33,7 @@ public class ArtistList extends AppCompatActivity {
 
     FirebaseDatabase database;
     Query list;
-    String artistId="";
+    String artistId;
 
     FirebaseRecyclerAdapter<ArtistPorfolio, ListViewHolder> adapter;
 
@@ -59,12 +59,12 @@ public class ArtistList extends AppCompatActivity {
             artistId = getIntent().getStringExtra("ArtistId");
             list = FirebaseDatabase.getInstance().getReference("ArtistPortfolio").orderByChild("artistID").equalTo(artistId);
             Toast.makeText(this, artistId, Toast.LENGTH_SHORT).show();
-            LoadList(artistId);
+            LoadList();
         }
 
 }
 
-    private void LoadList(String artistId) {
+    private void LoadList() {
         adapter = new FirebaseRecyclerAdapter<ArtistPorfolio, ListViewHolder>(ArtistPorfolio.class,R.layout.listitem,ListViewHolder.class,list) {
             @Override
             protected void populateViewHolder(ListViewHolder viewHolder, ArtistPorfolio model, int position) {
@@ -79,6 +79,7 @@ public class ArtistList extends AppCompatActivity {
                     public void onClick(View view, int position, boolean isLongClick) {
                         Intent artistDetail = new Intent(ArtistList.this,ArtistDetail.class);
                         artistDetail.putExtra("ArtistID",adapter.getRef(position).getKey());
+                        artistDetail.putExtra("id", artistId);
                         startActivity(artistDetail);
 
 

@@ -74,9 +74,9 @@ public class AddImages extends AppCompatActivity {
 
                 collapsingToolbarLayout1.setTitle(currentPortfolio.getName());
 
-                artist_date1.setText(currentPortfolio.getCurrentDate());
+                artist_date1.setText("Date: "+currentPortfolio.getCurrentDate());
 
-                artist_time1.setText(currentPortfolio.getCurrentTime());
+                artist_time1.setText("Time: " +currentPortfolio.getCurrentTime());
 
                 artist_location1.setText("Location: "+currentPortfolio.getLocation());
 

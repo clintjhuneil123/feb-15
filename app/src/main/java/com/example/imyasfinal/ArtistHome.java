@@ -224,7 +224,8 @@ public class ArtistHome extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_view) {
+        } else if (id == R.id.nav_book) {
+            startActivity(new Intent(ArtistHome.this, ArtistBooking.class));
 
         } else if (id == R.id.nav_log) {
             mAuth.getInstance().signOut();

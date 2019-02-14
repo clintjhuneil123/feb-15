@@ -103,21 +103,21 @@
                         android:textStyle="bold" />
 
                     <LinearLayout
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/artist_date"
                             android:layout_marginTop="8dp"
                             android:padding="15dp"
-                            android:layout_marginLeft="60dp"
+
                             android:text="Feb. 04, 2019"
                             android:textColor="@color/colorPrimary"
                             android:textSize="15sp"
                             android:textStyle="bold"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent" />
+                            android:layout_width="wrap_content"
+
+                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:id="@+id/artist_time"
@@ -127,9 +127,9 @@
                             android:textColor="@color/colorPrimary"
                             android:textSize="15sp"
                             android:textStyle="bold"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent" />
+                            android:layout_width="wrap_content"
+
+                            android:layout_height="wrap_content" />
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/layout_price"
@@ -137,6 +137,15 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         >
+                        <TextView
+                            android:layout_marginTop="8dp"
+                            android:text="Rate:"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="30sp"
+                            android:textStyle="bold"
+                            android:layout_width="0dp"
+                            android:layout_weight="4"
+                            android:layout_height="wrap_content" />
                         <ImageView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"

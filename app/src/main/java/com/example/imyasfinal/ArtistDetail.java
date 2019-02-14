@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,10 +46,13 @@ public class ArtistDetail extends AppCompatActivity implements DatePickerDialog.
     FloatingActionButton btnCart;
     ElegantNumberButton numberButton;
     String detailId="";
+    String clientId="";
+
     FirebaseDatabase database;
     DatabaseReference details;
     ArtistPorfolio currentPortfolio;
     Request request;
+    FirebaseAuth mAuth;
 
     FloatingActionButton fabart;
     RelativeLayout rootLayout1;
@@ -57,6 +61,7 @@ public class ArtistDetail extends AppCompatActivity implements DatePickerDialog.
     private String currentTime;
     private String currentDate;
     private String status;
+    private static String service;
 
     TextView dateText, timeText, services;
     MaterialEditText edtLoc,edtrate,edtpeople;
@@ -66,7 +71,7 @@ public class ArtistDetail extends AppCompatActivity implements DatePickerDialog.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artist_detail);
-
+        mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         details = database.getReference("ArtistPortfolio");
 
@@ -107,6 +112,8 @@ public class ArtistDetail extends AppCompatActivity implements DatePickerDialog.
 //            }
 //        });
 
+        clientId = mAuth.getCurrentUser().getUid();
+
 
 
         artist_location = (TextView) findViewById(R.id.artist_loc);
@@ -116,13 +123,15 @@ public class ArtistDetail extends AppCompatActivity implements DatePickerDialog.
         artist_name = (TextView) findViewById(R.id.artist_name);
         artist_price = (TextView) findViewById(R.id.artist_price);
         artist_image = (ImageView) findViewById(R.id.img_artist);
+        services = (TextView) findViewById(R.id.servicess) ;
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppbar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppbar);
 
         if(getIntent() !=null)
-            detailId = getIntent().getStringExtra("ArtistID");
+
+                detailId = getIntent().getStringExtra("ArtistID");
         if(!detailId.isEmpty())
         {
             getDetailArtist(detailId);
@@ -150,10 +159,11 @@ public class ArtistDetail extends AppCompatActivity implements DatePickerDialog.
        
         edtLoc = add_menu_layout.findViewById(R.id.edtLocationart);
         edtpeople = add_menu_layout.findViewById(R.id.edtpeopleart);
-        edtrate = add_menu_layout.findViewById(R.id.edtRatesart);
+//        edtrate = add_menu_layout.findViewById(R.id.edtRatesart);
         dateText=add_menu_layout.findViewById(R.id.dateTextart);
         timeText=add_menu_layout.findViewById(R.id.timeTextart);
         services = add_menu_layout.findViewById(R.id.servicess);
+        services.setText(service);
         timebtnart = add_menu_layout.findViewById(R.id.timebtnart);
         datebtnart = add_menu_layout.findViewById(R.id.datebtnart);
         timebtnart.setOnClickListener(this);
@@ -206,26 +216,25 @@ public class ArtistDetail extends AppCompatActivity implements DatePickerDialog.
             request.setCurrentdate(dateText.getText().toString());
             request.setCurrenttime(timeText.getText().toString());
             request.setPeople(edtpeople.getText().toString());
-            request.setRates(edtrate.getText().toString());
+
+//            request.setRates(edtrate.getText().toString());
 //            request.setStatus();
         String status = "PENDING";
 
-
-
-            Request request = new Request(
-                    edtLoc.getText().toString(),
-                    edtpeople.getText().toString(),
-                    edtrate.getText().toString(),
-                    dateText.getText().toString(),
-                    timeText.getText().toString(),
-                    status
-
-
-
-            );
-
         DatabaseReference getId = FirebaseDatabase.getInstance().getReference("Request");
         String id = getId.push().getKey();
+        Request request = new Request(
+                edtLoc.getText().toString(),
+                edtpeople.getText().toString(),
+//                    edtrate.getText().toString(),
+                dateText.getText().toString(),
+                timeText.getText().toString(),
+                status,
+                clientId,
+                getIntent().getStringExtra("id"),
+                id
+
+        );
         FirebaseDatabase.getInstance().getReference("Request")
                 .child(id)
                 .setValue(request).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -282,15 +291,17 @@ public class ArtistDetail extends AppCompatActivity implements DatePickerDialog.
 
                 collapsingToolbarLayout.setTitle(currentPortfolio.getName());
 
-                artist_date.setText(currentPortfolio.getCurrentDate());
+                artist_date.setText("Date: "+currentPortfolio.getCurrentDate());
 
-                artist_time.setText(currentPortfolio.getCurrentTime());
+                artist_time.setText("Artist: "+ currentPortfolio.getCurrentTime());
 
                 artist_location.setText("Location: "+currentPortfolio.getLocation());
 
                 artist_price.setText(currentPortfolio.getPrice());
 
                 artist_name.setText(currentPortfolio.getName());
+
+                service = currentPortfolio.getName();
 
                 artist_description.setText(currentPortfolio.getDescription());
             }

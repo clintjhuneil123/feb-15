@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Booking"></activity>
+        <activity android:name=".ArtistBooking"></activity>
+        <activity android:name=".Booking" />
         <activity android:name=".ArtistProfile" />
         <activity android:name=".AddImages" />
         <activity android:name=".ArtistAddList" />

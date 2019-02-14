@@ -35,6 +35,7 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity android:name="com.example.imyasfinal.ArtistBooking" />
         <activity android:name="com.example.imyasfinal.Booking" />
         <activity android:name="com.example.imyasfinal.ArtistProfile" />
         <activity android:name="com.example.imyasfinal.AddImages" />

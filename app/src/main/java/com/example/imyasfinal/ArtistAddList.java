@@ -41,6 +41,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -76,6 +77,7 @@ public class ArtistAddList extends AppCompatActivity implements DatePickerDialog
     private static final int IMAGE_REQUEST_1 = 1;
     FirebaseRecyclerAdapter<ArtistPorfolio, ListViewHolder> searchadapter;
     private String currentTime;
+    FirebaseAuth mAuth;
     private String currentDate;
 
     TextView dateText, timeText;
@@ -95,10 +97,13 @@ public class ArtistAddList extends AppCompatActivity implements DatePickerDialog
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
+        mAuth = FirebaseAuth.getInstance();
 
 
 
-        fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,10 +115,19 @@ public class ArtistAddList extends AppCompatActivity implements DatePickerDialog
 
         if(getIntent() !=null){
             artistId = getIntent().getStringExtra("ArtistId");
+
+            if(artistId.equals(mAuth.getCurrentUser().getUid())){
+                fab.setVisibility(View.VISIBLE);
+            }
+            else{
+                fab.setVisibility(View.GONE);
+            }
             list2 = FirebaseDatabase.getInstance().getReference("ArtistPortfolio").orderByChild("artistID").equalTo(artistId);
             Toast.makeText(this, artistId, Toast.LENGTH_SHORT).show();
             LoadList(artistId);
         }
+
+
     }
 
 
@@ -384,24 +398,24 @@ public class ArtistAddList extends AppCompatActivity implements DatePickerDialog
         }
     }
 
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        if(item.getTitle().equals(CommonArt.UPDATE))
-        {
-            showupdatedialog(searchadapter.getRef(item.getOrder()).getKey(),searchadapter.getItem(item.getOrder()));
-        }
-        else if(item.getTitle().equals(CommonArt.DELETE))
-        {
-            deleteportfolio(searchadapter.getRef(item.getOrder()).getKey());
-        }
+//    @Override
+//    public boolean onContextItemSelected(MenuItem item) {
+//        if(item.getTitle().equals(CommonArt.UPDATE))
+//        {
+//            showupdatedialog(searchadapter.getRef(item.getOrder()).getKey(),searchadapter.getItem(item.getOrder()));
+//        }
+//        else if(item.getTitle().equals(CommonArt.DELETE))
+//        {
+//            deleteportfolio(searchadapter.getRef(item.getOrder()).getKey());
+//        }
+//
+//
+//        return super.onContextItemSelected(item);
+//    }
 
-
-        return super.onContextItemSelected(item);
-    }
-
-    private void deleteportfolio(String key) {
-        list1.child(key).removeValue();
-    }
+//    private void deleteportfolio(String key) {
+//        list1.child(key).removeValue();
+//    }
 
     private void showupdatedialog(String key, final ArtistPorfolio item) {
 
@@ -455,11 +469,11 @@ public class ArtistAddList extends AppCompatActivity implements DatePickerDialog
 
                 if(newartistPorfolio != null)
                 {
-                    item.setName(edtName.getText().toString());
-                    item.setDescription(edtDesc.getText().toString());
-                    item.setLocation(edtLoc.getText().toString());
-                    item.getCurrentDate();
-                    item.getCurrentTime();
+//                    item.setName(edtName.getText().toString());
+//                    item.setDescription(edtDesc.getText().toString());
+//                    item.setLocation(edtLoc.getText().toString());
+//                    item.getCurrentDate();
+//                    item.getCurrentTime();
 
 
                     list1.push().setValue(newartistPorfolio);
