@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/feb-15.iml" filepath="$PROJECT_DIR$/feb-15.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/IMYASFINAL.iml" filepath="$PROJECT_DIR$/IMYASFINAL.iml" />
->>>>>>> 670f4b822d967ad17b21cdffae20177dcae96d4c
     </modules>
   </component>
 </project>
