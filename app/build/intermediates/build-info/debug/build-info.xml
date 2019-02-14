@@ -6,8 +6,13 @@
     density="xhdpi"
     format="10"
     plugin-version="3.3.1"
+<<<<<<< HEAD
     timestamp="1550178231881"
     token="-8053005037454013931"
+=======
+    timestamp="1550160546004"
+    token="-7909502026338168655"
+>>>>>>> 670f4b822d967ad17b21cdffae20177dcae96d4c
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
@@ -92,7 +97,11 @@
     </build>
     <build
         build-mode="COLD"
+<<<<<<< HEAD
         timestamp="1550178231881"
+=======
+        timestamp="1550160546004"
+>>>>>>> 670f4b822d967ad17b21cdffae20177dcae96d4c
         verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>
