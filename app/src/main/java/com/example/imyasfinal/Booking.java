@@ -104,10 +104,10 @@ public class Booking extends AppCompatActivity implements DatePickerDialog.OnDat
         requestadapter = new FirebaseRecyclerAdapter<Request, RequestViewHolder>(Request.class,R.layout.pending_layout,RequestViewHolder.class,request) {
             @Override
             protected void populateViewHolder(RequestViewHolder viewHolder, Request model, int position) {
-                if(model.getArtistId().equals(mAuth.getCurrentUser().getUid())&&model.getStatus().equals("APPROVE")){
+                if(model.getClientId().equals(mAuth.getCurrentUser().getUid())&&model.getStatus().equals("APPROVE")){
                     PushNotification("Approved","Book Approved");
                 }
-                else if(model.getArtistId().equals(mAuth.getCurrentUser().getUid())&&model.getStatus().equals("DECLINE")){
+                else if(model.getClientId().equals(mAuth.getCurrentUser().getUid())&&model.getStatus().equals("DECLINE")){
                     PushNotification("Decline","decline Book");
                 }
                 viewHolder.bookloc.setText(model.getLocation());

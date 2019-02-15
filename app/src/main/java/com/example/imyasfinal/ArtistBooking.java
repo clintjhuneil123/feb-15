@@ -30,6 +30,8 @@ public class ArtistBooking extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
 
     FirebaseDatabase database;
+    DatabaseReference getClient;
+    private static String name;
     Query request1;
     DatabaseReference approve,decline,delete,namee;
     Request reques;
@@ -73,9 +75,25 @@ public class ArtistBooking extends AppCompatActivity {
     private void artmenu() {
         requestartadapter = new FirebaseRecyclerAdapter<Request, ArtistViewBookHolder>(Request.class, R.layout.pendingartlayout, ArtistViewBookHolder.class, request1) {
             @Override
-            protected void populateViewHolder(ArtistViewBookHolder viewHolder, Request model, int position) {
+            protected void populateViewHolder(final ArtistViewBookHolder viewHolder, final Request model, int position) {
 //               namee = FirebaseDatabase.getInstance().getReference("Client").child();
+                getClient = FirebaseDatabase.getInstance().getReference("Clients");
+                getClient.child(model.getClientId()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            name = dataSnapshot.child("firstname").getValue().toString().concat(dataSnapshot.child("lastname").getValue().toString());
+                            viewHolder.bookratname.setText(name);
+                            Toast.makeText(ArtistBooking.this, model.getClientId(), Toast.LENGTH_SHORT).show();
 
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(ArtistBooking.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
 //                viewHolder.bookratname.setText(model.lastname);
                 viewHolder.booklocart.setText(model.getLocation());

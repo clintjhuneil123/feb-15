@@ -285,18 +285,18 @@ public class ArtistAddList extends AppCompatActivity implements DatePickerDialog
 
         LayoutInflater inflater = this.getLayoutInflater();
         View add_menu_layout = inflater.inflate(R.layout.add_new_artist_layout, null);
-        ImgArtistPhoto0 = (ImageView) add_menu_layout.findViewById(R.id.photoartist) ;
-        edtName0 = add_menu_layout.findViewById(R.id.edtName);
-        edtDesc0 = add_menu_layout.findViewById(R.id.edtDescription);
-        edtLoc0 = add_menu_layout.findViewById(R.id.edtLocation);
-        dateText0=add_menu_layout.findViewById(R.id.dateText);
-        timeText0=add_menu_layout.findViewById(R.id.timeText);
-        datebtn0 = add_menu_layout.findViewById(R.id.datebtn);
-        timebtn0 = add_menu_layout.findViewById(R.id.timebtn);
-        timebtn0.setOnClickListener(this);
-        datebtn0.setOnClickListener(this);
-        edtPrice0 = add_menu_layout.findViewById(R.id.edtPrice);
-        btnUpload0 = add_menu_layout.findViewById(R.id.btnUpload);
+        ImgArtistPhoto = (ImageView) add_menu_layout.findViewById(R.id.photoartist) ;
+        edtName = add_menu_layout.findViewById(R.id.edtName);
+        edtDesc = add_menu_layout.findViewById(R.id.edtDescription);
+        edtLoc = add_menu_layout.findViewById(R.id.edtLocation);
+        dateText=add_menu_layout.findViewById(R.id.dateText);
+        timeText=add_menu_layout.findViewById(R.id.timeText);
+        datebtn = add_menu_layout.findViewById(R.id.datebtn);
+        timebtn = add_menu_layout.findViewById(R.id.timebtn);
+        timebtn.setOnClickListener(this);
+        datebtn.setOnClickListener(this);
+        edtPrice = add_menu_layout.findViewById(R.id.edtPrice);
+        btnUpload = add_menu_layout.findViewById(R.id.btnUpload);
 
 
         ImgArtistPhoto.setOnClickListener(new View.OnClickListener() {
@@ -422,7 +422,7 @@ public class ArtistAddList extends AppCompatActivity implements DatePickerDialog
         }
         else if(item.getTitle().equals(CommonArt.DELETE))
         {
-            deleteportfolio(searchadapter.getRef(item.getOrder()).getKey());
+            deleteportfolio();
         }
 
 
@@ -430,96 +430,96 @@ public class ArtistAddList extends AppCompatActivity implements DatePickerDialog
     }
 
     private void updateportfolio() {
-        update =  FirebaseDatabase.getInstance().getReference("Request").child(upid);
-        update.addValueEventListener(new ValueEventListener() {
-                                         @Override
-                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                             String date  = dataSnapshot.child("currentdate").getValue().toString();
-                                             String time = dataSnapshot.child("currenttime").getValue().toString();
-                                             String desc = dataSnapshot.child("description").getValue().toString();
-                                             String loc = dataSnapshot.child("location").getValue().toString();
-                                             String nam = dataSnapshot.child("name").getValue().toString();
-                                             String pri = dataSnapshot.child("price").getValue().toString();
-                                             String image = dataSnapshot.child("image").getValue().toString();
-                                             
-                                         }
-
-                                         @Override
-                                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                         }
-                                     });
-
-
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(ArtistAddList.this);
-        alertDialog.setTitle("Update Portfolio");
-        alertDialog.setMessage("Please fill full information");
-
-        LayoutInflater inflater = this.getLayoutInflater();
-        View add_menu_layout = inflater.inflate(R.layout.update_new_artist_layout, null);
-        ImgArtistPhoto = (ImageView) add_menu_layout.findViewById(R.id.photoartist0) ;
-        edtName = add_menu_layout.findViewById(R.id.edtName0);
-        edtDesc = add_menu_layout.findViewById(R.id.edtDescription0);
-        edtLoc = add_menu_layout.findViewById(R.id.edtLocation0);
-        dateText=add_menu_layout.findViewById(R.id.dateText0);
-        timeText=add_menu_layout.findViewById(R.id.timeText0);
-        datebtn = add_menu_layout.findViewById(R.id.datebtn0);
-        timebtn = add_menu_layout.findViewById(R.id.timebtn0);
-        timebtn.setOnClickListener(this);
-        datebtn.setOnClickListener(this);
-        edtPrice = add_menu_layout.findViewById(R.id.edtPrice0);
-        btnUpload = add_menu_layout.findViewById(R.id.btnUpload0);
-
-
-        ImgArtistPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Build.VERSION.SDK_INT <= 22) {
-                    checkandRequestForPermission();
-                } else {
-                    openGallery();
-                }
-            }
-        });
-
-
-        btnUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadImage();
-            }
-        });
-
-        alertDialog.setView(add_menu_layout);
-        alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
-
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-
-                if(newartistPorfolio != null)
-                {
-                    list1.push().setValue(newartistPorfolio);
-                    Snackbar.make(rootLayout,"New Portfolio"+newartistPorfolio.getName()+"was added",Snackbar.LENGTH_SHORT)
-                            .show();;
-                }
-            }
-        });
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                dialog.dismiss();
-
-            }
-        });
-
-        alertDialog.show();
+//        update =  FirebaseDatabase.getInstance().getReference("Request").child(upid);
+//        update.addValueEventListener(new ValueEventListener() {
+//                                         @Override
+//                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                             String date  = dataSnapshot.child("currentdate").getValue().toString();
+//                                             String time = dataSnapshot.child("currenttime").getValue().toString();
+//                                             String desc = dataSnapshot.child("description").getValue().toString();
+//                                             String loc = dataSnapshot.child("location").getValue().toString();
+//                                             String nam = dataSnapshot.child("name").getValue().toString();
+//                                             String pri = dataSnapshot.child("price").getValue().toString();
+//                                             String image = dataSnapshot.child("image").getValue().toString();
+//
+//                                         }
+//
+//                                         @Override
+//                                         public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                                         }
+//                                     });
+//
+//
+//                AlertDialog.Builder alertDialog = new AlertDialog.Builder(ArtistAddList.this);
+//        alertDialog.setTitle("Update Portfolio");
+//        alertDialog.setMessage("Please fill full information");
+//
+//        LayoutInflater inflater = this.getLayoutInflater();
+//        View add_menu_layout = inflater.inflate(R.layout.update_new_artist_layout, null);
+//        ImgArtistPhoto = (ImageView) add_menu_layout.findViewById(R.id.photoartist0) ;
+//        edtName = add_menu_layout.findViewById(R.id.edtName0);
+//        edtDesc = add_menu_layout.findViewById(R.id.edtDescription0);
+//        edtLoc = add_menu_layout.findViewById(R.id.edtLocation0);
+//        dateText=add_menu_layout.findViewById(R.id.dateText0);
+//        timeText=add_menu_layout.findViewById(R.id.timeText0);
+//        datebtn = add_menu_layout.findViewById(R.id.datebtn0);
+//        timebtn = add_menu_layout.findViewById(R.id.timebtn0);
+//        timebtn.setOnClickListener(this);
+//        datebtn.setOnClickListener(this);
+//        edtPrice = add_menu_layout.findViewById(R.id.edtPrice0);
+//        btnUpload = add_menu_layout.findViewById(R.id.btnUpload0);
+//
+//
+//        ImgArtistPhoto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (Build.VERSION.SDK_INT <= 22) {
+//                    checkandRequestForPermission();
+//                } else {
+//                    openGallery();
+//                }
+//            }
+//        });
+//
+//
+//        btnUpload.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                uploadImage();
+//            }
+//        });
+//
+//        alertDialog.setView(add_menu_layout);
+//        alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
+//
+//        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//
+//                if(newartistPorfolio != null)
+//                {
+//                    list1.push().setValue(newartistPorfolio);
+//                    Snackbar.make(rootLayout,"New Portfolio"+newartistPorfolio.getName()+"was added",Snackbar.LENGTH_SHORT)
+//                            .show();;
+//                }
+//            }
+//        });
+//        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//                dialog.dismiss();
+//
+//            }
+//        });
+//
+//        alertDialog.show();
 
     }
 
-    private void deleteportfolio(String key) {
+    private void deleteportfolio() {
         
     }
 
