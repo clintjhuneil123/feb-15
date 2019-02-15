@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.imyasfinal.Interface.ItemClickListener;
 import com.example.imyasfinal.ViewHolder.ListViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,12 +27,12 @@ public class ClientProfile extends AppCompatActivity {
     TextView artist_fname1, artist_lastname1,artist_description11,artist_email11,getArtist_cont1;
     ImageView artist_imag1;
 
-    String detailId="";
     Query details;
     FirebaseDatabase database;
     DatabaseReference getCurrentUser;
+    private static String geid;
 
-    FirebaseRecyclerAdapter<ArtistPorfolio, ListViewHolder> adapter;
+    FirebaseAuth mAuth;
     Client client;
 
     @Override
@@ -41,8 +42,8 @@ public class ClientProfile extends AppCompatActivity {
 
 
         database = FirebaseDatabase.getInstance();
-        details = database.getReference("ArtistPortfolio").orderByChild("artistID").equalTo(getIntent().getStringExtra("ArtistId"));
-
+//        details = database.getReference("ArtistPortfolio").orderByChild("artistID").equalTo(getIntent().getStringExtra("ArtistId"));
+        mAuth = FirebaseAuth.getInstance();
         getCurrentUser = FirebaseDatabase.getInstance().getReference();
         artist_fname1 = (TextView) findViewById(R.id.artist_NAME1);
         artist_lastname1 = (TextView) findViewById(R.id.artist_LNAME1);
@@ -50,13 +51,14 @@ public class ClientProfile extends AppCompatActivity {
         getArtist_cont1 = (TextView) findViewById(R.id.artist_NUM1);
         artist_imag1 = (ImageView) findViewById(R.id.img_profile11);
 
+
             getprofile();
 
     }
 
     private void getprofile() {
-        getCurrentUser = FirebaseDatabase.getInstance().getReference("Client");
-        getCurrentUser.child(detailId).addValueEventListener(new ValueEventListener() {
+        getCurrentUser = FirebaseDatabase.getInstance().getReference("Clients");
+        getCurrentUser.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 client = dataSnapshot.getValue(Client.class);

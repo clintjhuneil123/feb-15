@@ -142,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent successIntent = new Intent(this, Home.class);
         startActivity(successIntent);
         Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show();
+
     }
 
     public void error(){

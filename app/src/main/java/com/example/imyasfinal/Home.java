@@ -85,6 +85,8 @@ public class Home extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         txtEmail1 = (TextView)headerView.findViewById(R.id.txtEmail1);
         txtFullName1 = (TextView)headerView.findViewById(R.id.txtFullName1);
+        txtEmail11 = headerView.findViewById(R.id.txtartEmail);
+        txtFullName11 = headerView.findViewById(R.id.txtartFullName);
         recyler_menu = (RecyclerView) findViewById(R.id.recycler_menu);
         recyler_menu.setHasFixedSize(true);
         LayoutManager = new LinearLayoutManager(this);
@@ -97,7 +99,7 @@ public class Home extends AppCompatActivity
 
 
         getCurrentUser = FirebaseDatabase.getInstance().getReference("Artist");
-        getCurrentClient = FirebaseDatabase.getInstance().getReference("Client");
+        getCurrentClient = FirebaseDatabase.getInstance().getReference("Clients");
 
         getCurrentUser.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -115,11 +117,17 @@ public class Home extends AppCompatActivity
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
+
                             String cemail = dataSnapshot.child("email").getValue().toString();
-                            String cname = dataSnapshot.child("lastname").getKey().toString();
-                            txtFullName11.setText(cname);
-                            txtEmail11.setText(cemail);
+                            String cname = dataSnapshot.child("lastname").getValue().toString();
+                            txtFullName1.setText(cname);
+                            txtEmail1.setText(cemail);
+                            Toast.makeText(Home.this, cname, Toast.LENGTH_SHORT).show();
+
+
+
                         }
+
                         }
 
                         @Override
@@ -154,6 +162,7 @@ public class Home extends AppCompatActivity
                     Intent list = new Intent(Home.this,ArtistProfile.class);
                     list.putExtra("ArtistId",adapter.getRef(position).getKey());
                     startActivity(list);
+
                 }
             });
 

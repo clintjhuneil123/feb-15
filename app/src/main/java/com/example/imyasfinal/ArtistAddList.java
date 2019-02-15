@@ -42,9 +42,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -64,7 +67,7 @@ public class ArtistAddList extends AppCompatActivity implements DatePickerDialog
     FloatingActionButton fab;
     RelativeLayout rootLayout;
     FirebaseDatabase db;
-    DatabaseReference list1;
+    DatabaseReference list1,update;
     Query list2;
     static int PreqCode = 1;
     static int REQUESCODE = 1;
@@ -79,12 +82,25 @@ public class ArtistAddList extends AppCompatActivity implements DatePickerDialog
     private String currentTime;
     FirebaseAuth mAuth;
     private String currentDate;
-
     TextView dateText, timeText;
     MaterialEditText edtName,edtDesc,edtPrice,edtLoc;
     Button btnUpload,timebtn,datebtn;
-
     ArtistPorfolio newartistPorfolio;
+
+
+   //
+   private String currentDate0;
+    private String currentTime0;
+   ImageView ImgArtistPhoto0;
+    TextView dateText0, timeText0;
+    MaterialEditText edtName0,edtDesc0,edtPrice0,edtLoc0;
+    Button btnUpload0,timebtn0,datebtn0;
+    private static String upid;
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -269,18 +285,18 @@ public class ArtistAddList extends AppCompatActivity implements DatePickerDialog
 
         LayoutInflater inflater = this.getLayoutInflater();
         View add_menu_layout = inflater.inflate(R.layout.add_new_artist_layout, null);
-        ImgArtistPhoto = (ImageView) add_menu_layout.findViewById(R.id.photoartist) ;
-        edtName = add_menu_layout.findViewById(R.id.edtName);
-        edtDesc = add_menu_layout.findViewById(R.id.edtDescription);
-        edtLoc = add_menu_layout.findViewById(R.id.edtLocation);
-        dateText=add_menu_layout.findViewById(R.id.dateText);
-        timeText=add_menu_layout.findViewById(R.id.timeText);
-        datebtn = add_menu_layout.findViewById(R.id.datebtn);
-        timebtn = add_menu_layout.findViewById(R.id.timebtn);
-        timebtn.setOnClickListener(this);
-        datebtn.setOnClickListener(this);
-        edtPrice = add_menu_layout.findViewById(R.id.edtPrice);
-        btnUpload = add_menu_layout.findViewById(R.id.btnUpload);
+        ImgArtistPhoto0 = (ImageView) add_menu_layout.findViewById(R.id.photoartist) ;
+        edtName0 = add_menu_layout.findViewById(R.id.edtName);
+        edtDesc0 = add_menu_layout.findViewById(R.id.edtDescription);
+        edtLoc0 = add_menu_layout.findViewById(R.id.edtLocation);
+        dateText0=add_menu_layout.findViewById(R.id.dateText);
+        timeText0=add_menu_layout.findViewById(R.id.timeText);
+        datebtn0 = add_menu_layout.findViewById(R.id.datebtn);
+        timebtn0 = add_menu_layout.findViewById(R.id.timebtn);
+        timebtn0.setOnClickListener(this);
+        datebtn0.setOnClickListener(this);
+        edtPrice0 = add_menu_layout.findViewById(R.id.edtPrice);
+        btnUpload0 = add_menu_layout.findViewById(R.id.btnUpload);
 
 
         ImgArtistPhoto.setOnClickListener(new View.OnClickListener() {
@@ -339,7 +355,7 @@ public class ArtistAddList extends AppCompatActivity implements DatePickerDialog
                 Picasso.get().load(model.getImage())
 //                Picasso.with(getBaseContext()).load(model.getImage())
                         .into(viewHolder.list_image);
-
+                upid = searchadapter.getRef(position).getKey();
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
@@ -414,6 +430,93 @@ public class ArtistAddList extends AppCompatActivity implements DatePickerDialog
     }
 
     private void updateportfolio() {
+        update =  FirebaseDatabase.getInstance().getReference("Request").child(upid);
+        update.addValueEventListener(new ValueEventListener() {
+                                         @Override
+                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                             String date  = dataSnapshot.child("currentdate").getValue().toString();
+                                             String time = dataSnapshot.child("currenttime").getValue().toString();
+                                             String desc = dataSnapshot.child("description").getValue().toString();
+                                             String loc = dataSnapshot.child("location").getValue().toString();
+                                             String nam = dataSnapshot.child("name").getValue().toString();
+                                             String pri = dataSnapshot.child("price").getValue().toString();
+                                             String image = dataSnapshot.child("image").getValue().toString();
+                                             
+                                         }
+
+                                         @Override
+                                         public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                         }
+                                     });
+
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(ArtistAddList.this);
+        alertDialog.setTitle("Update Portfolio");
+        alertDialog.setMessage("Please fill full information");
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View add_menu_layout = inflater.inflate(R.layout.update_new_artist_layout, null);
+        ImgArtistPhoto = (ImageView) add_menu_layout.findViewById(R.id.photoartist0) ;
+        edtName = add_menu_layout.findViewById(R.id.edtName0);
+        edtDesc = add_menu_layout.findViewById(R.id.edtDescription0);
+        edtLoc = add_menu_layout.findViewById(R.id.edtLocation0);
+        dateText=add_menu_layout.findViewById(R.id.dateText0);
+        timeText=add_menu_layout.findViewById(R.id.timeText0);
+        datebtn = add_menu_layout.findViewById(R.id.datebtn0);
+        timebtn = add_menu_layout.findViewById(R.id.timebtn0);
+        timebtn.setOnClickListener(this);
+        datebtn.setOnClickListener(this);
+        edtPrice = add_menu_layout.findViewById(R.id.edtPrice0);
+        btnUpload = add_menu_layout.findViewById(R.id.btnUpload0);
+
+
+        ImgArtistPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT <= 22) {
+                    checkandRequestForPermission();
+                } else {
+                    openGallery();
+                }
+            }
+        });
+
+
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadImage();
+            }
+        });
+
+        alertDialog.setView(add_menu_layout);
+        alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
+
+        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+                if(newartistPorfolio != null)
+                {
+                    list1.push().setValue(newartistPorfolio);
+                    Snackbar.make(rootLayout,"New Portfolio"+newartistPorfolio.getName()+"was added",Snackbar.LENGTH_SHORT)
+                            .show();;
+                }
+            }
+        });
+        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+
+            }
+        });
+
+        alertDialog.show();
+
     }
 
     private void deleteportfolio(String key) {

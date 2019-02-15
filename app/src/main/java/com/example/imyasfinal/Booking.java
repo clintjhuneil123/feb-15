@@ -71,7 +71,6 @@ public class Booking extends AppCompatActivity implements DatePickerDialog.OnDat
     private String currentDate;
     Request request11;
     String bookingId="";
-    String updateId="";
     private static String upid;
     NotificationManagerCompat notificationManagerCompat;
 
