@@ -398,101 +398,26 @@ public class ArtistAddList extends AppCompatActivity implements DatePickerDialog
         }
     }
 
-//    @Override
-//    public boolean onContextItemSelected(MenuItem item) {
-//        if(item.getTitle().equals(CommonArt.UPDATE))
-//        {
-//            showupdatedialog(searchadapter.getRef(item.getOrder()).getKey(),searchadapter.getItem(item.getOrder()));
-//        }
-//        else if(item.getTitle().equals(CommonArt.DELETE))
-//        {
-//            deleteportfolio(searchadapter.getRef(item.getOrder()).getKey());
-//        }
-//
-//
-//        return super.onContextItemSelected(item);
-//    }
-
-//    private void deleteportfolio(String key) {
-//        list1.child(key).removeValue();
-//    }
-
-    private void showupdatedialog(String key, final ArtistPorfolio item) {
-
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(ArtistAddList.this);
-        alertDialog.setTitle("Edit Portfolio");
-        alertDialog.setMessage("Please fill full information");
-
-        LayoutInflater inflater = this.getLayoutInflater();
-        View add_menu_layout = inflater.inflate(R.layout.add_new_artist_layout, null);
-        ImgArtistPhoto = (ImageView) add_menu_layout.findViewById(R.id.photoartist) ;
-        edtName = add_menu_layout.findViewById(R.id.edtName);
-        edtDesc = add_menu_layout.findViewById(R.id.edtDescription);
-        edtLoc = add_menu_layout.findViewById(R.id.edtLocation);
-        dateText=add_menu_layout.findViewById(R.id.dateText);
-        timeText=add_menu_layout.findViewById(R.id.timeText);
-        datebtn = add_menu_layout.findViewById(R.id.datebtn);
-        timebtn = add_menu_layout.findViewById(R.id.timebtn);
-        timebtn.setOnClickListener(this);
-        datebtn.setOnClickListener(this);
-
-        edtName.setText(item.getName());
-        edtDesc.setText(item.getDescription());
-        edtLoc.setText(item.getLocation());
-        dateText.setText(item.getCurrentDate());
-        timeText.setText(item.getCurrentTime());
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if(item.getTitle().equals(CommonArt.UPDATE))
+        {
+                updateportfolio();    
+        }
+        else if(item.getTitle().equals(CommonArt.DELETE))
+        {
+            deleteportfolio(searchadapter.getRef(item.getOrder()).getKey());
+        }
 
 
-        edtPrice = add_menu_layout.findViewById(R.id.edtPrice);
-        btnUpload = add_menu_layout.findViewById(R.id.btnUpload);
-
-
-        ImgArtistPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Build.VERSION.SDK_INT <= 22) {
-                    checkandRequestForPermission();
-                } else {
-                    openGallery();
-                }
-            }
-        });
-
-
-        alertDialog.setView(add_menu_layout);
-        alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
-
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-
-                if(newartistPorfolio != null)
-                {
-//                    item.setName(edtName.getText().toString());
-//                    item.setDescription(edtDesc.getText().toString());
-//                    item.setLocation(edtLoc.getText().toString());
-//                    item.getCurrentDate();
-//                    item.getCurrentTime();
-
-
-                    list1.push().setValue(newartistPorfolio);
-                    Snackbar.make(rootLayout,"Portfolio"+newartistPorfolio.getName()+"was edited",Snackbar.LENGTH_SHORT)
-                            .show();;
-                }
-            }
-        });
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                dialog.dismiss();
-
-            }
-        });
-
-        alertDialog.show();
-
-
+        return super.onContextItemSelected(item);
     }
+
+    private void updateportfolio() {
+    }
+
+    private void deleteportfolio(String key) {
+        
+    }
+
 }

@@ -31,14 +31,16 @@ public class ArtistBooking extends AppCompatActivity {
 
     FirebaseDatabase database;
     Query request1;
-    DatabaseReference approve,decline,delete;
+    DatabaseReference approve,decline,delete,namee;
     Request reques;
     private static String reqid;
     private static String reid;
     private static String rei;
     private FirebaseAuth mAuth;
-    TextView booklocart, booktimeart, bookdateart, bookpeopleart, bookrateart, bookstatusart;
+    TextView booklocart, booktimeart, bookdateart, bookpeopleart, bookratname, bookstatusart;
     FirebaseRecyclerAdapter<Request, ArtistViewBookHolder> requestartadapter;
+
+    Client client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +54,12 @@ public class ArtistBooking extends AppCompatActivity {
            request1 = database.getReference("Request").orderByChild("artistId").equalTo(mAuth.getCurrentUser().getUid());
 
 
-
         recyclerView = (RecyclerView) findViewById(R.id.recycler_bookart);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        bookratname = (TextView) findViewById(R.id.book_nameart);
         booklocart = (TextView) findViewById(R.id.book_locationart);
         booktimeart = (TextView) findViewById(R.id.book_dateart);
         bookdateart = (TextView) findViewById(R.id.book_dateart);
@@ -72,7 +74,10 @@ public class ArtistBooking extends AppCompatActivity {
         requestartadapter = new FirebaseRecyclerAdapter<Request, ArtistViewBookHolder>(Request.class, R.layout.pendingartlayout, ArtistViewBookHolder.class, request1) {
             @Override
             protected void populateViewHolder(ArtistViewBookHolder viewHolder, Request model, int position) {
+//               namee = FirebaseDatabase.getInstance().getReference("Client").child();
 
+
+//                viewHolder.bookratname.setText(model.lastname);
                 viewHolder.booklocart.setText(model.getLocation());
                 viewHolder.bookpeopleart.setText(model.getPeople());
 //                viewHolder.bookrate.setText(model.getRates());

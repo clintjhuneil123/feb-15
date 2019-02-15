@@ -13,7 +13,7 @@ import com.example.imyasfinal.R;
 public class ArtistViewBookHolder  extends RecyclerView.ViewHolder implements View.OnClickListener ,
         View.OnCreateContextMenuListener{
 
-    public TextView booklocart,booktimeart,bookdateart,bookpeopleart,bookrate,bookstatusart;
+    public TextView booklocart,booktimeart,bookdateart,bookpeopleart,bookratname,bookstatusart;
 
     private ItemClickListener itemClickListener;
 
@@ -22,7 +22,7 @@ public class ArtistViewBookHolder  extends RecyclerView.ViewHolder implements Vi
 
         booklocart = (TextView) itemView.findViewById(R.id.book_locationart);
         bookpeopleart = (TextView) itemView.findViewById(R.id.book_peopleart);
-//        bookrate = (TextView) itemView.findViewById(R.id.book_rate);
+        bookratname = (TextView) itemView.findViewById(R.id.book_nameart);
         bookdateart = (TextView) itemView.findViewById(R.id.book_dateart);
         booktimeart = (TextView) itemView.findViewById(R.id.book_timeart);
         bookstatusart = (TextView) itemView.findViewById(R.id.book_statusart);

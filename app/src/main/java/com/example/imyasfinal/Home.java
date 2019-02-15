@@ -47,7 +47,7 @@ public class Home extends AppCompatActivity
 
 //    String categoryid="";
     FirebaseAuth mAuth;
-    TextView txtFullName,txtEmail;
+    TextView txtFullName1,txtEmail1,txtFullName11,txtEmail11;
     ImageView artist_ima;
     RecyclerView recyler_menu;
     RecyclerView.LayoutManager LayoutManager;
@@ -73,10 +73,6 @@ public class Home extends AppCompatActivity
         getCurrentClient = FirebaseDatabase.getInstance().getReference();
 
 
-
-
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -87,14 +83,12 @@ public class Home extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         View headerView = navigationView.getHeaderView(0);
-        txtEmail = (TextView)headerView.findViewById(R.id.txtEmail);
-        txtFullName = (TextView)headerView.findViewById(R.id.txtFullName);
-//        txtFullName.setText(CommonArt.currentArt.getLastname());
-        //txtFullName.setText(mAuth.getCurrentUser().getDisplayName());
+        txtEmail1 = (TextView)headerView.findViewById(R.id.txtEmail1);
+        txtFullName1 = (TextView)headerView.findViewById(R.id.txtFullName1);
         recyler_menu = (RecyclerView) findViewById(R.id.recycler_menu);
         recyler_menu.setHasFixedSize(true);
         LayoutManager = new LinearLayoutManager(this);
-        artist_ima = (ImageView) findViewById(R.id.imagvIEW);
+//        artist_ima = (ImageView) findViewById(R.id.imagvIEW);
         recyler_menu.setLayoutManager(LayoutManager);
 
 
@@ -108,13 +102,11 @@ public class Home extends AppCompatActivity
         getCurrentUser.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        art = dataSnapshot.getValue(Artist.class);
                         if(dataSnapshot.exists()){
-//                            Picasso.get().load(art.getImage()).into(artist_ima);
                             String email = dataSnapshot.child("email").getValue().toString();
                             String  name = dataSnapshot.child("firstname").getValue().toString();
-                            txtFullName.setText(name);
-                            txtEmail.setText(email);
+                            txtFullName1.setText(name);
+                            txtEmail1.setText(email);
 
                         }
                 else
@@ -125,8 +117,8 @@ public class Home extends AppCompatActivity
                         if(dataSnapshot.exists()){
                             String cemail = dataSnapshot.child("email").getValue().toString();
                             String cname = dataSnapshot.child("lastname").getKey().toString();
-                            txtFullName.setText(cname);
-                            txtEmail.setText(cemail);
+                            txtFullName11.setText(cname);
+                            txtEmail11.setText(cemail);
                         }
                         }
 
@@ -221,7 +213,7 @@ public class Home extends AppCompatActivity
             startActivity(new Intent(Home.this, Booking.class));
 
         } else if (id == R.id.nav_profile) {
-
+            startActivity(new Intent(Home.this, ClientProfile.class));
         } else if (id == R.id.nav_log) {
             mAuth.getInstance().signOut();
             Intent signIn = new Intent(Home.this,MainActivity.class);

@@ -64,11 +64,6 @@ public class ArtistHome extends AppCompatActivity
     DrawerLayout drawer;
 
 
-
-    //
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

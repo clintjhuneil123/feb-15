@@ -45,8 +45,7 @@ public class RequestViewHolder extends RecyclerView.ViewHolder implements View.O
     @Override
     public void onCreateContextMenu(ContextMenu contextMenu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         contextMenu.setHeaderTitle("Select the action");
-        contextMenu.add(0,0,getAdapterPosition(), CommonArt.ACCEPT);
-        contextMenu.add(0,1,getAdapterPosition(), CommonArt.DECLINE);
-
+        contextMenu.add(0,0,getAdapterPosition(), CommonArt.UPDATE);
+        contextMenu.add(0,1,getAdapterPosition(), CommonArt.DELETE);
     }
 }

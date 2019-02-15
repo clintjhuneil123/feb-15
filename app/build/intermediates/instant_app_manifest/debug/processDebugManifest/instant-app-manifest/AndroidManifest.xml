@@ -27,6 +27,7 @@
     <uses-permission android:name="com.example.imyasfinal.permission.C2D_MESSAGE" />
 
     <application
+        android:name="com.example.imyasfinal.Java"
         android:allowBackup="true"
         android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
         android:debuggable="true"
@@ -36,6 +37,7 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity android:name="com.example.imyasfinal.ClientProfile" />
         <activity android:name="com.example.imyasfinal.ArtistBooking" />
         <activity android:name="com.example.imyasfinal.Booking" />
         <activity android:name="com.example.imyasfinal.ArtistProfile" />
