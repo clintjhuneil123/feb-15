@@ -44,7 +44,7 @@ public class ArtistProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artist_profile);
 
-        database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase .getInstance();
         details = database.getReference("ArtistPortfolio").orderByChild("artistID").equalTo(getIntent().getStringExtra("ArtistId"));
 
         getCurrentUser = FirebaseDatabase.getInstance().getReference();

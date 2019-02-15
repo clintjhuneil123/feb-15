@@ -75,43 +75,7 @@ public class ArtistDetail extends AppCompatActivity implements DatePickerDialog.
         database = FirebaseDatabase.getInstance();
         details = database.getReference("ArtistPortfolio");
 
-//        numberButton = (ElegantNumberButton) findViewById(R.id.number_button);
-
-//                btnCart = (FloatingActionButton) findViewById(R.id.btnCart);
 //
-//                btnCart.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        currentPortfolio = new ArtistPorfolio(
-//                                detailId,
-//                                currentPortfolio.getName(),
-//                                numberButton.getNumber(),
-//                                currentPortfolio.getPrice(),
-//                                currentPortfolio.getDescription()
-//                        );
-//
-//
-//
-//                Toast.makeText(ArtistDetail.this, "Added to List", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-
-//        btnCart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                new Database(getBaseContext()).addToCart(new Order(
-//                        detailId,
-//                        currentPortfolio.getName(),
-//                        numberButton.getNumber(),
-//                        currentPortfolio.getPrice(),
-//                        currentPortfolio.getDescription()
-//
-//                ));
-//
-//            }
-//        });
-
         clientId = mAuth.getCurrentUser().getUid();
 
 
@@ -250,8 +214,6 @@ public class ArtistDetail extends AppCompatActivity implements DatePickerDialog.
             }
         });
     }
-
-
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
         Calendar c = Calendar.getInstance();

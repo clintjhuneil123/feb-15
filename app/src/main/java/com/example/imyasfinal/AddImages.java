@@ -5,6 +5,8 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,8 +24,8 @@ public class AddImages extends AppCompatActivity {
     TextView artist_name1, artist_price1,artist_description1,artist_location1,artist_date1,artist_time1;
     ImageView artist_image1;
     CollapsingToolbarLayout collapsingToolbarLayout1;
-    ElegantNumberButton numberButton1;
-
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
     String imagesId="";
 
     FirebaseDatabase database;
@@ -42,7 +44,10 @@ public class AddImages extends AppCompatActivity {
         images = database.getReference("ArtistPortfolio");
 
 //        numberButton1 = (ElegantNumberButton) findViewById(R.id.number_button);
-
+        recyclerView =(RecyclerView) findViewById(R.id.recycler_art);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
         artist_location1 = (TextView) findViewById(R.id.artist_loc1);
         artist_date1 = (TextView) findViewById(R.id.artist_date1);
         artist_time1 = (TextView) findViewById(R.id.artist_time1);

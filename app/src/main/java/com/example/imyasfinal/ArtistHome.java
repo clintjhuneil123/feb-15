@@ -81,15 +81,6 @@ public class ArtistHome extends AppCompatActivity
 
 
         mAuth = FirebaseAuth.getInstance();
-//        currentartist = mAuth.getCurrentUser();
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//               showDialog();
-//            }
-//        });
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -216,9 +207,9 @@ public class ArtistHome extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            // Handle the camera action
+            startActivity(new Intent(ArtistHome.this, ArtistProfile.class));
         } else if (id == R.id.nav_gallery) {
-
+            startActivity(new Intent(ArtistHome.this, ArtistProfile.class));
         } else if (id == R.id.nav_book) {
             startActivity(new Intent(ArtistHome.this, ArtistBooking.class));
 

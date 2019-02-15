@@ -70,7 +70,7 @@ public class Booking extends AppCompatActivity implements DatePickerDialog.OnDat
     private String currentTime;
     private String currentDate;
     Request request11;
-    String bookingId="";
+    String clientId="";
     private static String upid;
     NotificationManagerCompat notificationManagerCompat;
 
@@ -94,7 +94,7 @@ public class Booking extends AppCompatActivity implements DatePickerDialog.OnDat
 //        bookrate = (TextView) findViewById(R.id.book_rate);
         bookstatus=(TextView) findViewById(R.id.book_status);
         notificationManagerCompat = NotificationManagerCompat.from(getApplication());
-
+        clientId = mAuth.getCurrentUser().getUid();
         menu();
 
 
@@ -104,10 +104,10 @@ public class Booking extends AppCompatActivity implements DatePickerDialog.OnDat
         requestadapter = new FirebaseRecyclerAdapter<Request, RequestViewHolder>(Request.class,R.layout.pending_layout,RequestViewHolder.class,request) {
             @Override
             protected void populateViewHolder(RequestViewHolder viewHolder, Request model, int position) {
-                if(model.getClientId().equals(mAuth.getCurrentUser().getUid())&&model.getStatus().equals("APPROVE")){
+                if(model.getClientId().equals(mAuth.getCurrentUser().getUid()) && model.getStatus().equals("APPROVED")){
                     PushNotification("Approved","Book Approved");
                 }
-                else if(model.getClientId().equals(mAuth.getCurrentUser().getUid())&&model.getStatus().equals("DECLINE")){
+                else if(model.getClientId().equals(mAuth.getCurrentUser().getUid())&&model.getStatus().equals("DECLINED")){
                     PushNotification("Decline","decline Book");
                 }
                 viewHolder.bookloc.setText(model.getLocation());
@@ -149,25 +149,6 @@ public class Booking extends AppCompatActivity implements DatePickerDialog.OnDat
     }
 
 
-// (getActivity(), ShopDashboard.class);
-//        PendingIntent contentIntent = PendingIntent.getActivity(getActivity(),0,notificationIntent,0);
-//        Notification notification = new NotificationCompat.Builder(getContext(), myTrades)
-//                .setSmallIcon(R.drawable.logo)
-//                .setContentTitle(title)
-//                .setContentText(content)
-//                .setPriority(NotificationCompat.PRIORITY_HIGH)
-//                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-//                .setContentIntent(contentIntent)
-//                .setStyle(new NotificationCompat.BigTextStyle()
-//                        .bigText(content))
-//                .build();
-//
-//        notificationManagerCompat.notify(3, notification);
-
-
-
-
-
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -187,6 +168,7 @@ public class Booking extends AppCompatActivity implements DatePickerDialog.OnDat
 
     private void delete() {
         delete = FirebaseDatabase.getInstance().getReference("Request");
+        delete.child(upid).removeValue();
         delete.child(upid).removeValue();
     }
 
@@ -285,7 +267,7 @@ public class Booking extends AppCompatActivity implements DatePickerDialog.OnDat
                 dateText1.getText().toString(),
                 timeText1.getText().toString(),
                 status,
-                bookingId,
+                clientId,
                 getIntent().getStringExtra("id"),
                 id
 
@@ -316,7 +298,6 @@ public class Booking extends AppCompatActivity implements DatePickerDialog.OnDat
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         currentDate = DateFormat.getDateInstance().format(c.getTime());
         dateText1.setText(currentDate);
-
     }
 
     @Override

@@ -33,10 +33,10 @@ public class ArtistBooking extends AppCompatActivity {
     DatabaseReference getClient;
     private static String name;
     Query request1;
-    DatabaseReference approve,decline,delete,namee;
+    DatabaseReference approve,decline1,delete,namee;
     Request reques;
     private static String reqid;
-    private static String reid;
+    private static String reLid;
     private static String rei;
     private FirebaseAuth mAuth;
     TextView booklocart, booktimeart, bookdateart, bookpeopleart, bookratname, bookstatusart;
@@ -103,7 +103,7 @@ public class ArtistBooking extends AppCompatActivity {
                 viewHolder.booktimeart.setText(model.getCurrenttime());
                 viewHolder.bookstatusart.setText(model.getStatus());
                 reqid = model.getRequestId();
-                reid=model.getRequestId();
+                reLid = model.getRequestId();
 
 //                viewHolder.bookstatus.setText(model.get);
                 final  Request clickItem = model;
@@ -147,6 +147,7 @@ public class ArtistBooking extends AppCompatActivity {
     private void showdelete() {
         delete = FirebaseDatabase.getInstance().getReference("Request");
         delete.child(reqid).removeValue();
+//        delete.child(reid).removeValue();
     }
 
     private void showaccept() {
@@ -159,6 +160,7 @@ public class ArtistBooking extends AppCompatActivity {
                     approve.child("status").setValue("APPROVED");
                     finish();
                 }
+
             }
 
             @Override
@@ -171,13 +173,13 @@ public class ArtistBooking extends AppCompatActivity {
 
 
     private void showdecline() {
-        decline = FirebaseDatabase.getInstance().getReference("Request").child(reid);
+        decline1 = FirebaseDatabase.getInstance().getReference("Request").child(reLid);
 
-        decline.addValueEventListener(new ValueEventListener() {
+        decline1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    decline.child("status").setValue("DECLINE");
+                    decline1.child("status").setValue("DECLINED");
                     finish();
                 }
             }

@@ -116,7 +116,7 @@ public class LoginArtist extends AppCompatActivity implements View.OnClickListen
     public void successful(){
         Intent successIntent = new Intent(this, ArtistHome.class);
         startActivity(successIntent);
-        Toast.makeText(this, "Welcomeboang", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show();
     }
 
     public void error(){
